@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APEX Growth — Fitness Client Acquisition Systems</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0d0d;
+  --bg2: #111111;
+  --bg3: #161616;
+  --border: #1f1f1f;
+  --border2: #2a2a2a;
+  --accent: #c8f560;
+  --accent-dim: rgba(200,245,96,0.08);
+  --text: #f0ede8;
+  --muted: #707070;
+  --muted2: #4a4a4a;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* NOISE TEXTURE OVERLAY */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  background: rgba(13,13,13,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 0.12em;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.nav-logo span { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--text); }
+
+.nav-cta {
+  background: var(--accent) !important;
+  color: #0d0d0d !important;
+  padding: 10px 22px;
+  border-radius: 4px;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  transition: opacity 0.2s !important;
+}
+
+.nav-cta:hover { opacity: 0.85; }
+
+/* SECTIONS */
+section { position: relative; }
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ===== HERO ===== */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 100px;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.hero-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 8vw, 110px);
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  margin-bottom: 28px;
+}
+
+.hero-headline em {
+  color: var(--accent);
+  font-style: normal;
+}
+
+.hero-sub {
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 440px;
+  margin-bottom: 44px;
+  font-weight: 400;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: #0d0d0d;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 16px 32px;
+  border-radius: 4px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border: 1px solid var(--border2);
+  padding: 15px 28px;
+  border-radius: 4px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+.hero-right {
+  position: relative;
+}
+
+.hero-stat-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.stat-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px 28px;
+  transition: border-color 0.3s;
+}
+
+.stat-card:hover { border-color: var(--border2); }
+
+.stat-card-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  line-height: 1;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
+.stat-card-label {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+  font-weight: 400;
+}
+
+.stat-card-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ===== PROBLEM ===== */
+#problem {
+  padding: 120px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted2);
+  margin-bottom: 24px;
+}
+
+.section-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(44px, 5vw, 68px);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  margin-bottom: 56px;
+  max-width: 600px;
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.problem-item {
+  background: var(--bg2);
+  padding: 40px;
+  transition: background 0.2s;
+}
+
+.problem-item:hover { background: var(--bg3); }
+
+.problem-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  color: var(--muted2);
+  margin-bottom: 20px;
+}
+
+.problem-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.problem-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+/* ===== SOLUTION ===== */
+#solution {
+  padding: 120px 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+}
+
+.solution-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.solution-intro p {
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+
+.solution-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pillar {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: default;
+}
+
+.pillar:last-child { border-bottom: none; }
+
+.pillar-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(200,245,96,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 18px;
+}
+
+.pillar-text h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.pillar-text p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* ===== HOW IT WORKS ===== */
+#how {
+  padding: 120px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.steps-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: 56px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.step {
+  padding: 40px 32px;
+  border-right: 1px solid var(--border);
+  position: relative;
+  background: var(--bg2);
+  transition: background 0.25s;
+}
+
+.step:last-child { border-right: none; }
+.step:hover { background: var(--bg3); }
+
+.step-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 56px;
+  line-height: 1;
+  color: var(--border2);
+  margin-bottom: 24px;
+  letter-spacing: 0.02em;
+  transition: color 0.25s;
+}
+
+.step:hover .step-num { color: var(--accent); }
+
+.step-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.step-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.step-connector {
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--muted2);
+  z-index: 2;
+}
+
+/* ===== GYM OWNERS ===== */
+#gyms {
+  padding: 120px 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+}
+
+.gyms-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.gyms-left .section-headline { margin-bottom: 24px; }
+
+.gyms-left p {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+
+.gyms-benefits {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.gyms-benefits li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.gyms-benefits li::before {
+  content: '→';
+  color: var(--accent);
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.badge-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.badge {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.badge-icon {
+  font-size: 20px;
+  width: 36px;
+  text-align: center;
+}
+
+.badge-text { color: var(--muted); font-size: 13px; margin-top: 2px; }
+
+/* ===== TESTIMONIALS ===== */
+#social {
+  padding: 120px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 56px;
+}
+
+.testi-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 32px;
+  transition: border-color 0.25s;
+}
+
+.testi-card:hover { border-color: var(--border2); }
+
+.testi-quote {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+.testi-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.testi-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.testi-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.testi-role {
+  font-size: 12px;
+  color: var(--muted2);
+  margin-top: 2px;
+}
+
+.stars {
+  color: var(--accent);
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+/* ===== FAQ ===== */
+#faq {
+  padding: 120px 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+}
+
+.faq-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 24px 0;
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  transition: color 0.2s;
+}
+
+.faq-q:hover { color: var(--accent); }
+
+.faq-arrow {
+  font-size: 20px;
+  color: var(--muted2);
+  transition: transform 0.25s, color 0.2s;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.faq-item.open .faq-arrow {
+  transform: rotate(45deg);
+  color: var(--accent);
+}
+
+.faq-a {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s ease;
+}
+
+.faq-item.open .faq-a { max-height: 300px; }
+
+.faq-a-inner {
+  padding-bottom: 24px;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+/* ===== BOOK A CALL ===== */
+#book {
+  padding: 120px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.book-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.book-left .section-headline { margin-bottom: 20px; }
+
+.book-left p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.book-points {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.book-points li {
+  font-size: 14px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.book-points li::before {
+  content: '✓';
+  width: 20px;
+  height: 20px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(200,245,96,0.2);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.calendly-wrap {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--bg2);
+}
+
+/* ===== FINAL CTA ===== */
+#final-cta {
+  padding: 140px 0;
+}
+
+.cta-inner {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.cta-inner .section-headline {
+  font-size: clamp(48px, 6vw, 80px);
+  max-width: none;
+  margin-bottom: 20px;
+}
+
+.cta-inner p {
+  font-size: 16px;
+  color: var(--muted);
+  margin-bottom: 44px;
+  line-height: 1.7;
+}
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.footer-logo span { color: var(--accent); }
+
+.footer-note {
+  font-size: 12px;
+  color: var(--muted2);
+}
+
+/* ANIMATIONS */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .container { padding: 0 24px; }
+  .hero-grid, .solution-layout, .gyms-card, .faq-layout, .book-layout { grid-template-columns: 1fr; gap: 40px; }
+  .gyms-card { padding: 40px 28px; }
+  #hero { padding-top: 120px; }
+  .steps-row { grid-template-columns: 1fr 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .problem-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">APEX<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#problem">The Problem</a></li>
+    <li><a href="#solution">Solution</a></li>
+    <li><a href="#how">Process</a></li>
+    <li><a href="#gyms">Partnerships</a></li>
+    <li><a href="#book" class="nav-cta">Book a Call</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-left fade-up">
+        <div class="hero-eyebrow">Fitness Growth Systems</div>
+        <h1 class="hero-headline">Turn Attention<br>Into <em>Clients.</em></h1>
+        <p class="hero-sub">We help fitness coaches and gyms grow through strategic short-form content and structured client acquisition systems.</p>
+        <div class="hero-actions">
+          <a href="#book" class="btn-primary">Book a Strategy Call →</a>
+          <a href="#gyms" class="btn-secondary">Explore Partnerships</a>
+        </div>
+      </div>
+      <div class="hero-right fade-up" style="transition-delay:0.15s">
+        <div class="hero-stat-stack">
+          <div class="stat-card-row">
+            <div class="stat-card">
+              <div class="stat-card-num">3×</div>
+              <div class="stat-card-label">Average engagement lift within 60 days</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-num">14<span style="font-size:24px">d</span></div>
+              <div class="stat-card-label">Average time to first inbound inquiry</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-num" style="font-size:36px;">Content that converts,<br>not just performs.</div>
+            <div class="stat-card-label" style="margin-top:10px;">Most coaches produce content. Few have a system that turns viewers into booked clients. That's the gap we close.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">// The Problem</div>
+      <h2 class="section-headline">Why Most Coaches Struggle to Grow</h2>
+    </div>
+    <div class="problem-grid fade-up">
+      <div class="problem-item">
+        <div class="problem-num">01</div>
+        <div class="problem-title">Inconsistent Engagement</div>
+        <p class="problem-desc">Posting sporadically without a strategic framework means the algorithm deprioritizes your content — and potential clients never see it in the first place.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-num">02</div>
+        <div class="problem-title">Views Without Conversions</div>
+        <p class="problem-desc">Getting reach is one thing. Getting the right people to take action is another. Most fitness content is built to entertain, not to convert — and the pipeline stays empty.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-num">03</div>
+        <div class="problem-title">No Referral or Network System</div>
+        <p class="problem-desc">Word-of-mouth is powerful but unpredictable without structure. Without a formal referral and collaboration framework, growth stalls at a personal ceiling.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-num">04</div>
+        <div class="problem-title">Reliance on Cold Outreach</div>
+        <p class="problem-desc">Cold DMs are a numbers game with diminishing returns. They're exhausting, low-conversion, and brand-damaging at scale. There's a better way to fill a calendar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solution">
+  <div class="container">
+    <div class="solution-layout">
+      <div class="solution-intro fade-up">
+        <div class="section-label">// The Solution</div>
+        <h2 class="section-headline">A Structured Growth System</h2>
+        <p>We don't offer generic content advice. We build a repeatable acquisition system around your brand — combining short-form content strategy, engagement optimization, and strategic partnerships within the fitness ecosystem.</p>
+        <p>The result: a predictable inbound pipeline, not a posting schedule that burns you out.</p>
+        <a href="#book" class="btn-primary" style="display:inline-flex;">Start the Conversation →</a>
+      </div>
+      <div class="solution-pillars fade-up" style="transition-delay:0.1s">
+        <div class="pillar">
+          <div class="pillar-icon">📐</div>
+          <div class="pillar-text">
+            <h4>Short-Form Content Strategy</h4>
+            <p>Platform-specific content direction built around your niche, voice, and offer — designed to attract the right audience, not just any audience.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">📈</div>
+          <div class="pillar-text">
+            <h4>Engagement Optimization</h4>
+            <p>Systematic frameworks for hooks, calls-to-action, and comment management that build trust and signal buying intent.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🎯</div>
+          <div class="pillar-text">
+            <h4>Conversion-Focused Direction</h4>
+            <p>Every piece of content is mapped to a conversion goal — awareness, consideration, or decision. No content without purpose.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🤝</div>
+          <div class="pillar-text">
+            <h4>Networking & Collaboration</h4>
+            <p>Access to a curated ecosystem of fitness professionals, gym owners, and aligned service providers — so you grow through relationships, not just reach.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">// Process</div>
+      <h2 class="section-headline">How It Works</h2>
+    </div>
+    <div class="steps-row fade-up">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Audit & Strategy</div>
+        <p class="step-desc">We analyze your current content, positioning, and offer. We identify what's working, what's leaking, and where the real growth opportunity is.</p>
+        <div class="step-connector">→</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">Content & Engagement Optimization</div>
+        <p class="step-desc">We build a structured content framework tailored to your platform and audience — with a clear system for driving engagement that converts.</p>
+        <div class="step-connector">→</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Conversion Alignment</div>
+        <p class="step-desc">We align your content output with your offer and sales process — ensuring that attention flows naturally toward booked calls and new clients.</p>
+        <div class="step-connector">→</div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-title">Strategic Partnerships & Growth</div>
+        <p class="step-desc">We connect you to aligned professionals and gyms within our network — building a collaborative referral ecosystem that grows alongside your business.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GYM OWNERS -->
+<section id="gyms">
+  <div class="container">
+    <div class="gyms-card fade-up">
+      <div class="gyms-left">
+        <div class="section-label">// For Gym Owners</div>
+        <h2 class="section-headline">Partner With Us</h2>
+        <p>We collaborate with a select group of gyms to create a seamless support system for their members. When a member is looking for additional coaching or specialist support, we connect them with the right professional — without disrupting your operations.</p>
+        <ul class="gyms-benefits">
+          <li>Strategic collaboration with vetted fitness professionals</li>
+          <li>Members receive aligned, quality referrals when they need more support</li>
+          <li>Performance-based partnership structure — zero upfront cost</li>
+          <li>Strengthens your gym's value proposition without added overhead</li>
+        </ul>
+        <a href="#book" class="btn-primary" style="display:inline-flex; margin-top:8px;">Apply for Partnership →</a>
+      </div>
+      <div class="gyms-right">
+        <div class="badge-stack">
+          <div class="badge">
+            <div class="badge-icon">🏢</div>
+            <div>
+              <div>Select gym partnerships only</div>
+              <div class="badge-text">We work with a limited number of gyms per region to maintain quality</div>
+            </div>
+          </div>
+          <div class="badge">
+            <div class="badge-icon">🔗</div>
+            <div>
+              <div>Seamless member experience</div>
+              <div class="badge-text">Referrals happen naturally — no disruption to your existing offerings</div>
+            </div>
+          </div>
+          <div class="badge">
+            <div class="badge-icon">📊</div>
+            <div>
+              <div>Performance-based model</div>
+              <div class="badge-text">Structure and terms discussed privately during the partnership call</div>
+            </div>
+          </div>
+          <div class="badge">
+            <div class="badge-icon">💬</div>
+            <div>
+              <div>Private partnership discussion</div>
+              <div class="badge-text">Full details of how the collaboration works are shared on inquiry</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section id="social">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">// Results</div>
+      <h2 class="section-headline">From the People We Work With</h2>
+    </div>
+    <div class="testimonials-grid fade-up">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-quote">"Before working with Apex, I had decent reach but zero inbound leads. Within 6 weeks of restructuring my content strategy, I had my first two discovery calls booked directly from Instagram. The system works."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">💪</div>
+          <div>
+            <div class="testi-name">Marcus T.</div>
+            <div class="testi-role">Online Fitness Coach · Strength & Conditioning</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-quote">"I was skeptical about the partnership model, but it's genuinely added value to our gym. Members who need something we don't offer get connected to quality coaches — and it's been entirely seamless."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">🏋️</div>
+          <div>
+            <div class="testi-name">Priya M.</div>
+            <div class="testi-role">Gym Owner · Performance Fitness Studio</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-quote">"The strategy session alone changed how I think about my content. I stopped chasing views and started creating with intention. Two new clients in the first month I applied the framework consistently."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">🎯</div>
+          <div>
+            <div class="testi-name">James L.</div>
+            <div class="testi-role">Personal Trainer · Online & In-Person</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="faq-layout">
+      <div class="fade-up">
+        <div class="section-label">// FAQ</div>
+        <h2 class="section-headline">Common Questions</h2>
+      </div>
+      <div class="faq-list fade-up" style="transition-delay:0.1s">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Who is this for? <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">This is built for online fitness coaches, personal trainers, and gym owners who are already active on social media but aren't converting attention into clients at the rate they want. You don't need a massive audience — you need the right system.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Do you guarantee results? <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">We don't make income guarantees — and you should be skeptical of anyone who does. What we provide is structured systems, strategic execution, and accountability. Results depend on the quality of your offer, your commitment to implementation, and market factors. We're here to build the machine with you.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            How do the gym partnerships work? <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Partnerships operate through a performance-based collaboration model. The specific structure is discussed privately during our initial partnership call — we tailor the arrangement to fit the gym's situation. The short version: you benefit when your members are well-supported, and it costs you nothing upfront.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            How soon can I get started? <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">After your strategy call, if it's a mutual fit, we typically onboard within 5–7 business days. We work with a limited number of clients at a time to ensure quality — so availability isn't always open.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            What platforms do you focus on? <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">We primarily work with Instagram and TikTok for short-form content, as these are the highest-leverage platforms for fitness professionals right now. YouTube Shorts is also part of the strategy where relevant. We build your system around where your audience already lives.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK A CALL -->
+<section id="book">
+  <div class="container">
+    <div class="book-layout">
+      <div class="book-left fade-up">
+        <div class="section-label">// Book a Call</div>
+        <h2 class="section-headline">Let's Build Your Growth System</h2>
+        <p>A 30-minute strategy call to understand where you are, where you want to be, and whether we're the right fit to help you get there. No pressure, no pitch deck.</p>
+        <ul class="book-points">
+          <li>Clarity on your current content and acquisition gaps</li>
+          <li>A high-level roadmap tailored to your situation</li>
+          <li>An honest assessment of whether we can help</li>
+          <li>Zero obligation to proceed</li>
+        </ul>
+        <a href="#book" class="btn-primary" style="display:inline-flex;">Schedule Now →</a>
+      </div>
+      <div class="calendly-wrap fade-up" style="transition-delay:0.15s">
+        <!-- Calendly inline widget begin -->
+        <div class="calendly-inline-widget" data-url="https://calendly.com/deeprajdahal10?background_color=10eb16" style="min-width:320px;height:700px;"></div>
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        <!-- Calendly inline widget end -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="final-cta">
+  <div class="container">
+    <div class="cta-inner fade-up">
+      <div class="section-label" style="justify-content:center; display:flex;">// Ready?</div>
+      <h2 class="section-headline">Let's Build Your<br>Growth System</h2>
+      <p>Stop leaving clients in your content. Start with a free strategy call — and walk away with a clearer picture of what's holding your growth back.</p>
+      <a href="#book" class="btn-primary" style="display:inline-flex; font-size:16px; padding:18px 40px;">Schedule a Call →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">APEX<span>.</span></a>
+  <div class="footer-note">© 2025 Apex Growth Systems. All rights reserved.</div>
+</footer>
+
+<script>
+// FAQ ACCORDION
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// SCROLL ANIMATIONS
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
